@@ -15,6 +15,7 @@
  */
 package com.example.android.sunshine;
 
+import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -26,6 +27,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.android.sunshine.data.SunshinePreferences;
 import com.example.android.sunshine.utilities.NetworkUtils;
@@ -74,11 +76,12 @@ public class MainActivity extends AppCompatActivity implements ForecastAdapter.F
         mRecyclerView.setHasFixedSize(true);
 
         // TODO (11) Pass in 'this' as the ForecastAdapterOnClickHandler
+
         /*
          * The ForecastAdapter is responsible for linking our weather data with the Views that
          * will end up displaying our weather data.
          */
-        mForecastAdapter = new ForecastAdapter();
+        mForecastAdapter = new ForecastAdapter(this);
 
         /* Setting the adapter attaches it to the RecyclerView in our layout. */
         mRecyclerView.setAdapter(mForecastAdapter);
@@ -111,7 +114,8 @@ public class MainActivity extends AppCompatActivity implements ForecastAdapter.F
     @Override
     public void onClickListener(String s) {
         // TODO (10) Show a Toast when an item is clicked, displaying that item's weather data
-
+        Context context = this;
+        Toast.makeText(context, s, Toast.LENGTH_SHORT).show();
     }
 
     /**
