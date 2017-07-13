@@ -222,7 +222,25 @@ public class MainActivity extends AppCompatActivity implements ForecastAdapterOn
         }
 
         // TODO (2) Launch the map when the map menu item is clicked
+        if (id == R.id.open_map) {
+            openMapLocation();
+            return true;
+        }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void openMapLocation() {
+        String address = "1600 Ampitheatre Parkway, CA";
+        Uri mapPage = Uri.parse("geo:0,0?q=" + address);
+
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setData(mapPage);
+
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            startActivity(intent);
+        } else {
+            Log.d(TAG, "Can't call " + mapPage.toString());
+        }
     }
 }
